@@ -1,112 +1,114 @@
 /*=============== SHOW MENU ===============*/
-const navMenu = document.getElementById('nav-menu'),
-    navToggle = document.getElementById('nav-toggle'),
-    navClose = document.getElementById('nav-close')
+const navMenu = document.getElementById("nav-menu"),
+  navToggle = document.getElementById("nav-toggle"),
+  navClose = document.getElementById("nav-close");
 
-/*===== MENU SHOW =====*/
+/*===== Menu Show =====*/
 /* Validate if constant exists */
-if(navToggle) {
-    navToggle.addEventListener("click",() =>{
-        navMenu.classList.add('show-menu')
-    })
+if (navToggle) {
+  navToggle.addEventListener("click", () => {
+    navMenu.classList.add("show-menu");
+  });
 }
 
-/*===== MENU HIDDEN =====*/
+/*===== Hide Show =====*/
 /* Validate if constant exists */
-if(navClose) {
-    navClose.addEventListener("click",() =>{
-        navMenu.classList.remove('show-menu')
-    })
+if (navClose) {
+  navClose.addEventListener("click", () => {
+    navMenu.classList.remove("show-menu");
+  });
 }
 
+/*=============== IMAGE GALLERY ===============*/
+function imgGallery() {
+  const mainImg = document.querySelector(".details__img"),
+    smallImg = document.querySelectorAll(".details__small-img");
 
-/*=============== SHOW CART ===============*/
-const cart = document.getElementById('cart'),
-    cartShop = document.getElementById('cart-shop'),
-    cartClose = document.getElementById('cart-close')
-
-/*===== CART SHOW =====*/
-/* Validate if constant exists */
-if(cartShop) {
-    cartShop.addEventListener("click",() =>{
-        cart.classList.add('show-cart')
-    })
+  smallImg.forEach((img) => {
+    img.addEventListener("click", function () {
+      mainImg.src = this.src;
+    });
+  });
 }
 
-/*===== CART HIDDEN =====*/
-/* Validate if constant exists */
-if(cartClose) {
-    cartClose.addEventListener("click",() =>{
-        cart.classList.remove('show-cart')
-    })
-}
+imgGallery();
 
+/*=============== SWIPER CATEGORIES ===============*/
+let swiperCategories = new Swiper(".categories__container", {
+  spaceBetween: 24,
+  loop: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
 
-/*=============== SHOW LOGIN ===============*/
-const login = document.getElementById('login'),
-    loginButton = document.getElementById('login-button'),
-    loginClose = document.getElementById('login-close')
-
-
-/*===== LOGIN SHOW =====*/
-/* Validate if constant exists */
-if(loginButton) {
-    loginButton.addEventListener("click",() =>{
-        login.classList.add('show-login')
-    })
-}
-
-/*===== LOGIN HIDDEN =====*/
-/* Validate if constant exists */
-if(loginClose) {
-    loginClose.addEventListener("click",() =>{
-        login.classList.remove('show-login')
-    })
-}
-
-/*=============== HOME SWIPER ===============*/
-var homeswiper = new Swiper(".home-swiper", {
-    spaceBetween:30,
-    loop: 'true',
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
+  breakpoints: {
+    350: {
+      slidesPerView: 2,
+      spaceBetween: 24,
     },
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 24,
+    },
+    992: {
+      slidesPerView: 4,
+      spaceBetween: 24,
+    },
+    1200: {
+      slidesPerView: 5,
+      spaceBetween: 24,
+    },
+    1400: {
+      slidesPerView: 6,
+      spaceBetween: 24,
+    },
+  },
+});
+
+/*=============== SWIPER PRODUCTS ===============*/
+let swiperProducts = new Swiper(".new__container", {
+  spaceBetween: 24,
+  loop: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  breakpoints: {
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 24,
+    },
+    992: {
+      slidesPerView: 4,
+      spaceBetween: 24,
+    },
+    1400: {
+      slidesPerView: 4,
+      spaceBetween: 24,
+    },
+  },
+});
+
+/*=============== PRODUCTS TABS ===============*/
+const tabs = document.querySelectorAll("[data-target]"),
+  tabsContents = document.querySelectorAll("[content]");
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const target = document.querySelector(tab.dataset.target);
+
+    tabsContents.forEach((tabsContent) => {
+      tabsContent.classList.remove("active-tab");
     });
 
-/*=============== CHANGE BACKGROUND HEADER ===============*/
-function scrollHeader(){
-    const header = document.getElementById('header')
-    //when the scroll is greater than 50 viewport height, add the scroll.header class to the header tag
-    if(this.scrollY >= 50) header.classList.add('scroll-header'); else header.classList.remove('scroll-header')
-}
-window.addEventListener('scroll',scrollHeader)
-/*=============== NEW SWIPER ===============*/
-var newSwiper = new Swiper(".new-swiper", {
-    spaceBetween:16,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    loop: 'true',
-    // pagination: {
-    //     el: ".swiper-pagination",
-    //     clickable: true,
-    // },
+    target.classList.add("active-tab");
+
+    tabs.forEach((tab) => {
+      tab.classList.remove("active-tab");
     });
 
-
-/*=============== SHOW SCROLL UP ===============*/ 
-function scrollUp(){
-    const scrollUp = document.getElementById('scroll-up');
-    //when the scroll is higher than 150 viewport height add show-scroll class to a tag with the scroll-top class
-    if(this.scrollY >= 350) scrollUp.classList.add('show-scroll');
-    else scrollUp.classList.remove('show-scroll')
-}
-window.addEventListener('scroll', scrollUp)
-
-/*=============== LIGHT BOX ===============*/
-
-
-/*=============== QUESTIONS ACCORDION ===============*/
-
-
-/*=============== STYLE SWITCHER ===============*/
+    tab.classList.add("active-tab");
+  });
+});
